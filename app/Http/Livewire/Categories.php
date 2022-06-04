@@ -8,7 +8,7 @@ use Livewire\Component;
 class Categories extends Component
 {
     public $form=false, $name='',$selected_id=0,$photo='';
-    public $qction='Litado', $componentName='Categorias',$search='';
+    public $action='Listado', $componentName='Categorias',$search='';
     private $pagination = 5;
     protected $paginationTheme='talwind';
     public function render()

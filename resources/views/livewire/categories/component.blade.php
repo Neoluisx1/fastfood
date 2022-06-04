@@ -53,7 +53,7 @@
     <div class="col-span-12 p-5">
         {{$categories->links()}}
     </div>
-    </div> ssss
+    </div>
     </div>
     @else
 @include('livewire.categories.form')
