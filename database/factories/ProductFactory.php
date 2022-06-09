@@ -28,9 +28,9 @@ class ProductFactory extends Factory
             'change' => ' ',
             'cost' => $cost,
             'price' => $price1,
-            'price1' =>$price2,
+            'price2' =>$price2,
             'stock' => $stock,
-            'ministock'=>$this->faker->randomElement([5,10,15,20,25])
+            'ministock'=>$this->faker->randomElement([5,10,15,20])
         ];
     }
 }

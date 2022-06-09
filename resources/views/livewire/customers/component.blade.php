@@ -11,6 +11,7 @@
                     <thead>
                         <tr class="text-theme-1">
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Nombre</th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Nit</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Telefono</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Ciudad</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Email</th>
@@ -24,6 +25,9 @@
                                 <h6 class="mb-1 font-medium">{{$customer->name}}</h6>
                             </td>
                             <td class="dark:border-dark-5">
+                                <h6 class="mb-1 font-medium">{{$customer->nit}}</h6>
+                            </td>
+                            <td class="dark:border-dark-5">
                                 <h6 class="mb-1 font-medium">{{$customer->phone}}</h6>
                             </td>
                             <td class="dark:border-dark-5">
@@ -34,8 +38,8 @@
                             </td>
                             <td class="dark:border-dark-5 text-center">
                                 <div class="d-flex justify-content-center">
-                                    @if($customer->orders->count() <1 )
-                                    <button class="btn btn-danger text-white border-0" onclick="destroy('customers','destroy',{{$customer->id}})" type="button">
+                                    @if($customer->orders->count() < 1)
+                                    <button class="btn btn-danger text-white border-0" onclick="destroy('destroy','{{$customer->id}}')">
                                         <i class="fas fa-trash fa-2x"></i>
                                     </button>
                                     @endif
@@ -68,9 +72,21 @@
 
     @include('livewire.sales.keyboard')
     <script>
-        const inputSearch = document.getElementById('search')
+       /* const inputSearch = document.getElementById('search')
         inputSearch.addEventListener('change',(e)=>{
             @this.search=e.target.value
+        })*/
+        document.addEventListener('click', (e)=>{
+            if(e.target.id == 'search'){
+                KioskBoard.run('#search',{})
+
+                document.getElementById('search').blur()
+                document.getElementById('search').focus()
+
+                const inputSearch = document.getElementById('search')
+                inputSearch.addEventListener('change',(e)=>{
+                @this.search=e.target.value})
+            }
         })
     </script>
 </div>

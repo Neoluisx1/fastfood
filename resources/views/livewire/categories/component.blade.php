@@ -27,7 +27,7 @@
                             </td>
                             <td class="dark:border-dark-5 text-center">
                                 <div class="d-flex justify-content-center">
-                                    @if($category->products->count() <1 )
+                                    @if($category->products->count() < 1)
                                     <button class="btn btn-danger text-white border-0" onclick="destroy('categories','destroy',{{$category->id}})" type="button">
                                         <i class="fas fa-trash fa-2x"></i>
                                     </button>
@@ -61,9 +61,17 @@
 
     @include('livewire.sales.keyboard')
     <script>
-        const inputSearch = document.getElementById('search')
-        inputSearch.addEventListener('change',(e)=>{
-            @this.search=e.target.value
+        document.addEventListener('click', (e)=>{
+            if(e.target.id == 'search'){
+                KioskBoard.run('#search',{})
+
+                document.getElementById('search').blur()
+                document.getElementById('search').focus()
+
+                const inputSearch = document.getElementById('search')
+                inputSearch.addEventListener('change',(e)=>{
+                @this.search=e.target.value})
+            }
         })
     </script>
 </div>

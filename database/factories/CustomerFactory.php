@@ -18,6 +18,7 @@ class CustomerFactory extends Factory
     {
         return [
             'name'=>$this->faker->name(),
+            'nit'=> $this->faker->numerify('######'),
             'phone'=> $this->faker->numerify('######'),
             'city'=>$this->faker->city(),
             'mail'=>$this->faker->unique()->safeEmail(),
