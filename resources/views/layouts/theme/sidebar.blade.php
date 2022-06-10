@@ -6,14 +6,13 @@
                 <div class="side-nav__devider my-6"></div>
                 <ul>
                     <li>
-                        <a href="#" class="side-menu">
+                        <a href="{{ route('categories') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
                             <div class="side-menu__title"> Categorias </div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('products') }}" class="side-menu">
-                        <a href="#" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="coffee"></i> </div>
                             <div class="side-menu__title"> Productos </div>
                         </a>
@@ -37,8 +36,8 @@
                             <div class="side-menu__title"> Clientes </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="side-menu">
+                    <li>                        
+                        <a href="{{ route('users') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="key"></i> </div>
                             <div class="side-menu__title"> Usuarios </div>
                         </a>

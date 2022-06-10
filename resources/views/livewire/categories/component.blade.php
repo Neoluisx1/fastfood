@@ -29,11 +29,11 @@
                                 <div class="d-flex justify-content-center">
                                     @if($category->products->count() <1 )
                                     <button class="btn btn-danger text-white border-0" onclick="destroy('categories','destroy',{{$category->id}})" type="button">
-                                        <i class="fas fa-trash fa-2x"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                     @endif
                                     <button class="btn btn-warning text-white border-0 ml-3" wire:click.prevent="Edit({{$category->id}})" type="button">
-                                        <i class="fas fa-edit fa-2x"></i></button>
+                                        <i class="fas fa-edit"></i></button>
                                 </div>
                             </div>
                         </tr>

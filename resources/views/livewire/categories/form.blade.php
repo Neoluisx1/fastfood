@@ -1,4 +1,4 @@
-<dvi class="intro-y col-span-12">
+<div class="intro-y col-span-12">
     <div class="intro-y box">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
@@ -33,4 +33,13 @@
                 </div>
             </div>
     </div>
-</dvi>
+    <script>
+        KioskBoard.run('#categoryName',{})
+        const inputCatName = document.getElementById('categoryName')
+        if(inputCatName){
+            inputCatName.addEventListener('change',(e) => {
+                @this.name = e.target.value
+            })
+        }
+    </script>
+</div>
