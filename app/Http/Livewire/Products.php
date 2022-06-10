@@ -20,21 +20,21 @@ class Products extends Component
             $price2 = 0, 
             $stock = 0, 
             $minstock = 0, 
-            $category_id = 'Elegir', 
+            $category = 'Elegir', 
             $selected_id = 0,
             $temporaryUrl,
-            $gallery = [];
-    public $action = 'Listado', $componentName = 'Catalogo de productos', $search, $form = false;
+            $gallery = [],
+            $action = 'Listado', $componentName = 'CATALOGO DE PRODUCTOS', $search, $form = false;
     private $pagination = 5;
-    protected $paginationtheme = 'tailwind';
+    protected $paginationTheme = 'tailwind';
 
     public function render()
     {
         if(strlen($this->search > 0))
-        $info = Product::join('categories as c','c.id', 'products.category_id')->select('products.*','c.name as category')->where('products.name')
-                ->orwhere('products.name','like',"%{$this->search}%")
-                ->orwhere('products.code','like',"%{$this->search}%")
-                ->orwhere('c.name','like',"%{$this->search}%")
+        $info = Product::join('categories as c','c.id', 'products.category_id')->select('products.*','c.name as category')
+                ->where('products.name','like',"%{$this->search}%")                
+                ->orWhere('products.code','like',"%{$this->search}%")
+                ->orWhere('c.name','like',"%{$this->search}%")
                 ->paginate($this->pagination);
         else
         $info = Product::join('categories as c','c.id', 'products.category_id')->select('products.*','c.name as category')               
@@ -45,14 +45,12 @@ class Products extends Component
         ])->layout('layouts.theme.app');
     }
 
-    public $listeners = [
-        'resetUI',
-        'Destroy'
-    ];
-    public function noty($msg, $eventName = 'Noty', $reset = true, $action = ''){
-        $this->dispatchBrowserEvent($eventName, ['msg' => $msg, 'type' => 'success', 'action' => $action]);
+    public $listeners = ['resetUI','Destroy'];
+
+    public function noty($msg, $eventName = 'noty', $reset = true, $action = ''){
+        $this->dispatchBrowserEvent($eventName,['msg' => $msg, 'type' => 'success', 'action' => $action]);
         if($reset) $this->resetUI();
-    }
+    }    
     public function AddNew(){
         $this->resetUI();
         $this->noty(null, 'open-modal');
@@ -60,7 +58,7 @@ class Products extends Component
     public function resetUI(){
         $this->resetValidation();
         $this->resetPage();
-        $this->reset('name','code','cost','price','price2','stock','minstock','selected_id','search','action','gallery');
+        $this->reset('name','code','cost','price','price2','stock','minstock','selected_id','search','action','gallery','category');
     }
     public function CloseModal(){
         $this->resetUI();
@@ -69,13 +67,13 @@ class Products extends Component
     public function Edit(Product $product){
         $this->selected_id = $product->id;
         $this->name = $product->name;
-        $this->codigo = $product->codigo;
+        $this->code = $product->code;
         $this->cost = $product->cost;
         $this->price = $product->price;
         $this->price2 = $product->price2;
         $this->stock = $product->stock;
         $this->minstock = $product->minstock;
-        $this->category_id = $product->category_id;
+        $this->category = $product->category_id;
         $this->noty('','open-modal', false);
     }
     public function Store(){
@@ -92,7 +90,7 @@ class Products extends Component
                 'price2' => $this->price2,
                 'stock' => $this->stock,
                 'minstock' => $this->minstock,
-                'category_id' => $this->category_id,
+                'category_id' => $this->category,
             ]
         );
         if(!empty($this->gallery)){
@@ -123,7 +121,7 @@ class Products extends Component
     public function Destroy(Product $product){
         $product->images()->each(function ($img){
             if($img->file != null && file_exists('storage/products/' . $img->file)){
-                unlink('storage/procuts/' . $img->file);
+                unlink('storage/products/' . $img->file);
             }
         });
         //Eliminar las relaciones
@@ -131,6 +129,6 @@ class Products extends Component
         // Eliminar le producto
         $product->delete();
 
-        $this->noty('Se Elimino el Producto');
+        $this->noty("Se Elimino el Producto.  <b>$product->name</b>");
     }
 }

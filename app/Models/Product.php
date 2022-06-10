@@ -16,7 +16,7 @@ class Product extends Model
             return [
                 'name' => 'required|min:3|max:100|string|unique:products',
                 'code' => 'nullable|max:25',
-                'category_id' => 'required|not_in:elegir',
+                'category' => 'required|not_in:Elegir',
                 'price' => 'gt:0',
                 'price2' => 'gt:0',
                 'stock' => 'required',
@@ -26,7 +26,7 @@ class Product extends Model
             return [
                 'name' => "required|min:3|max:100|string|unique:products,name,{$id}",
                 'code' => 'nullable|max:25',
-                'category_id' => 'required|not_in:elegir',
+                'category' => 'required|not_in:elegir',
                 'price' => 'gt:0',
                 'price2' => 'gt:0',
                 'stock' => 'required',
@@ -40,10 +40,11 @@ class Product extends Model
         'name.max' => 'Nombre del Producto debe tener menos de 100 caracteres',
         'name.unique' => 'El nombre ya existe',
         'code.max' => 'El codigo debe tener menos de 25 caracteres',
-        'category_id.not_in' => 'Seleccione una Categoria valida',
-        'category_id.required' => 'Seleccione una Categoria',
+        'category.not_in' => 'Seleccione una Categoria valida',
+        'category.required' => 'Seleccione una Categoria',
         'cost.gt' => 'El costo debe ser mayor a cero',
         'price.gt' => 'El precio debe ser mayor a cero',
+        'price2.gt' => 'El precio 2 debe ser mayor a cero',
         'stock.required' => 'Ingresa el Stock',
         'minstock.required' => 'Ingresa el Stock minimo',
     ];
@@ -64,12 +65,12 @@ class Product extends Model
     //accessors
     public function getImgAttribute(){
         if(count($this->images)){
-            if(file_exists('products/'. $this->images->last()->file))
-                return "products/" . $this->images()->last()->file;
+            if(file_exists('storage/products/'. $this->images->last()->file))
+                return 'products/' . $this->images->last()->file;
             else
                 return 'image_not_found.png';
         }else{
-            return 'no_imagen_available.png';
+            return 'no_imagen_available.jpg';
         }
     }
 }

@@ -36,8 +36,8 @@
                             <div class="side-menu__title"> Clientes </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="side-menu">
+                    <li>                        
+                        <a href="{{ route('users') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="key"></i> </div>
                             <div class="side-menu__title"> Usuarios </div>
                         </a>

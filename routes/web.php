@@ -1,7 +1,9 @@
 <?php
 use App\Http\Livewire\Categories;
+use App\Http\Livewire\Users;
 use App\Http\Livewire\Products;
 use App\Http\Livewire\Customers;
+use App\Http\Livewire\Sales;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get(uri:'categories', action:Categories::class)->name(name:'categories');
 Route::get(uri:'products', action:Products::class)->name(name:'products');
-Route::get(uri:'customers', action:customers::class)->name(name:'customers');
+Route::get(uri:'customers', action:Customers::class)->name(name:'customers');
+Route::get(uri:'users', action:Users::class)->name(name:'users');
+Route::get(uri:'sales', action:Sales::class)->name(name:'sales');
 
 Route::get('/', function () {
     return view('auth.login');
