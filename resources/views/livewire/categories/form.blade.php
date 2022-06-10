@@ -9,11 +9,10 @@
                 <div class="preview">
                     <div x-data="{}" x-init="setTimeout(() => {$refs.first.focus()}, 900 )">
                         <label class="form-label">Nombre</label>
-                        <input type="text" wire:model="name" x-ref="first" id="categoryName" class="form-control kioskboard {{$errors->forst('name') ? "border-theme-6" :""}}" placeholder="ingrrse la descripcion">
-                        @error('name')
-                        <x-alert msg="{{$message}}"/>
+                        <input wire:model="name" id="name" type="text" class="form-control form-control-lg border-start-0 kioskboard" maxlength="255" placeholder="Ej..Hamburguesa">                        @error('name')
 
-                            @enderror
+                        <x-alert msg="{{$message}}" />
+                        @enderror
 
                     </div>
                     <div class="mt-3">
