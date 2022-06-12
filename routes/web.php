@@ -3,6 +3,7 @@ use App\Http\Livewire\Categories;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\Products;
 use App\Http\Livewire\Customers;
+use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Sales;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::get(uri:'products', action:Products::class)->name(name:'products');
 Route::get(uri:'customers', action:Customers::class)->name(name:'customers');
 Route::get(uri:'users', action:Users::class)->name(name:'users');
 Route::get(uri:'sales', action:Sales::class)->name(name:'sales');
+Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash');
 
 Route::get('/', function () {
     return view('auth.login');

@@ -39,7 +39,7 @@
                             <td class="dark:border-dark-5 text-center">
                                 <div class="d-flex justify-content-center">
                                     @if($customer->orders->count() < 1)
-                                    <button class="btn btn-danger text-white border-0" onclick="destroy('destroy','{{$customer->id}}')">
+                                    <button class="btn btn-danger text-white border-0" onclick="destroy('customers','Destroy','{{$customer->id}}')">
                                         <i class="fas fa-trash fa-2x"></i>
                                     </button>
                                     @endif
