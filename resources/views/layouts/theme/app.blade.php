@@ -15,7 +15,9 @@
         <link rel="stylesheet" href="{{asset('dist/css/app.css')}}" />
         <link rel="stylesheet" href="{{asset('css/all.css')}}" />
         <link rel="stylesheet" href="{{asset('css/snackbar.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('dist/apexcharts.css')}}" />
         <script src="{{asset('js/kioskboard.js')}}"></script>
+
 
         <style>
             .image-fit>img{
@@ -33,11 +35,11 @@
     <body class="main">
         <!-- BEGIN: Mobile Menu -->
 
-        @include('layouts.theme.mobile-menu') 
+        @include('layouts.theme.mobile-menu')
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <!-- END: Mobile Menu -->
         <div class="flex">
             <!-- BEGIN: Side Menu -->
-            @include('layouts.theme.sidebar') 
+            @include('layouts.theme.sidebar')
             <!-- END: Side Menu -->
             <!-- BEGIN: Content -->
             <div class="content">
@@ -49,7 +51,7 @@
             <!-- END: Content -->
         </div>
         <!-- BEGIN: JS Assets-->
-          @include('layouts.theme.footer')      
+          @include('layouts.theme.footer')
         <!-- END: JS Assets-->
         <livewire:scripts />
     </body>

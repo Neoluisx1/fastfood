@@ -2,17 +2,21 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Image;
+
 use App\Models\Category;
 use Livewire\Component;
-
+use App\Models\Image;
 use Livewire\WithPagination;
-use Livewire\WithFileUploads; //subir imagenes
+use Livewire\WithFileUploads;
+
+
 
 class Categories extends Component
 {
+
     use WithPagination;
     use WithFileUploads;
+
     public $form=false, $name='',$selected_id=0,$photo='';
     public $action='Listado', $componentName='Categorias',$search='';
     private $pagination = 5;
@@ -91,7 +95,9 @@ class Categories extends Component
         $this->resetUI();
     }
     public function Destroy(Category $category){
+
         if($category->products->count() < 1){
+
             $category->delete();
             $this->noty("La Categoria <b>$category->name</b> fue eliminada");
         }
