@@ -16,7 +16,13 @@
         <link rel="stylesheet" href="{{asset('css/all.css')}}" />
         <link rel="stylesheet" href="{{asset('css/snackbar.min.css')}}" />
         <link rel="stylesheet" href="{{asset('dist/apexcharts.css')}}" />
+
+        <link rel="stylesheet" href="{{asset('css/mc-calendar.min.css')}}" />
+
         <script src="{{asset('js/kioskboard.js')}}"></script>
+
+        <script src="{{asset('js/mc-calendar.min.js')}}"></script>
+
 
 
         <style>

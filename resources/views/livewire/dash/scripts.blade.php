@@ -17,7 +17,7 @@
         [
             @this.top5Data[0]['product'],
             @this.top5Data[1]['product'],
-            @this.top5Data[2]['product']
+            @this.top5Data[2]['product'],
             @this.top5Data[3]['product'],
             @this.top5Data[4]['product']
           ],
@@ -39,7 +39,6 @@
         chartTop5.render();
 
 //gaficos semanales
-
         var optionsWeek = {
           series: [{
           name: 'Ventas del Dia',
@@ -54,11 +53,19 @@
           ]
         }],
           chart: {
-          height: 380,
+          height: 330,
           type: 'area'
         },
         dataLabels: {
-          enabled: false
+          enabled: true,
+          formatter: function(val){
+            return '$' + parseFloat(val).toFixed(2);
+          },
+          offsetY: -5,
+          style:{
+            fontSize: '12px',
+            colors:["#304758"]
+          }
         },
         stroke: {
           curve: 'smooth'
@@ -81,7 +88,7 @@
 
         var optionsMonth = {
           series: [{
-          name: 'Ventas del Anho Mensuales',
+          name: 'Ventas del Año Mensuales',
           data: @this.salesByMonth_Data
         }],
           chart: {
@@ -164,7 +171,7 @@
 
         function totalYearSales(){
             var total=0;
-            @this.salesByMonth_Data.froEach(item =>{
+            @this.salesByMonth_Data.forEach(item =>{
                 total +=parseFloat(item)
             })
             return 'Total: Bs.' + total.toFixed(2)

@@ -1,13 +1,15 @@
 <div>
-    <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y flex items-center">
         <div class="col-span-12 md:col-span-3">
-            <div class="intro-y box">
-                <h6 class="text-center font-bold">Elige el anho de Consultas</h6>
-                <select wire:model="year" class="form-select form-select-lg">
-                    @foreach($listYears as $y)
-                    <option value="{{$y}}">{{$y}}</option>
-                    @endforeach
-                </select>
+            <div class="intro-y box p-5">
+                <div>
+                    <label for="crud-form-1" class="form-label">Elige el año de las Consultas</label>                
+                    <select wire:model="year" class="form-select form-select-lg">
+                        @foreach($listYears as $y)
+                        <option value="{{$y}}">{{$y}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <nav class="side-nav">
-                <a href="" class="intro-x flex items-center pl-5 pt-4">
+                <a href="{{ route('dash') }}" class="intro-x flex items-center pl-5 pt-4">
                     <img alt="logo" class="w-6" src="{{asset('dist/images/logo.svg')}}">
                     <span class="hidden xl:block text-white text-lg ml-3"> Fast<span class="font-medium">Food</span> </span>
                 </a>
@@ -44,7 +44,7 @@
                     </li>
                     <div class="side-nav__devider my-6"></div>
                     <li>
-                        <a href="#" class="side-menu">
+                        <a href="{{ route('reports') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="calendar"></i> </div>
                             <div class="side-menu__title"> Reportes </div>
                         </a>
