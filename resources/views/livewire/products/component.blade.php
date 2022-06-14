@@ -35,7 +35,7 @@
                                     <tr class="dark:bg-dark-1 {{$loop->index % 2 > 0 ? 'bg-gray-200' : ''}}">
                                         <td class="text-center">
                                             <span>
-                                                <img src="{{ asset('storage/' . $product->img) }}" alt="" heigth="70" width="80" class="rounded">
+                                                <img src="{{ asset( $product->img) }}" data-action='zoom' alt="" heigth="70" width="80" class="rounded">
                                             </span>
                                         </td>
                                         <td class="dark:border-dar-5">

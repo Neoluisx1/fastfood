@@ -56,10 +56,11 @@
                             <div class="menu__title"> Reportes </div>
                         </a>
                     </li>
+                    <div class="side-nav__devider my-6"></div>
                     <li>
-                        <a href="#" class="menu">
-                            <div class="menu__icon"> <i data-feather="settings"></i> </div>
-                            <div class="menu__title"> Configuracion </div>
+                        <a href="{{ route('settings') }}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
+                            <div class="side-menu__title"> Configuraciones </div>
                         </a>
                     </li>
 

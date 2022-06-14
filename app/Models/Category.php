@@ -16,7 +16,7 @@ public static function rules($id)
     if($id <= 0){
         return ['name'=> 'required|min:3|max:50|unique:categories'];
     }else{
-        return ['name'=> "required|min:3|max:50|unique:categories,name{$id}"];
+        return ['name'=> "required|min:3|max:50|unique:categories,name,{$id}"];
     }
 }
     public static $messages =[
@@ -39,13 +39,14 @@ public static function rules($id)
     public function getImgAttribute(){
         $img = $this->image->file;
         if($img != null){
-            if(file_exists('storage/categories' . $img))
-                return 'storage/categories' . $img;
+            if(file_exists('storage/categories/' . $img))
+                return 'storage/categories/' . $img;
             else
                 return 'storage/image-not-found.png';
         }
 
         return 'storage/noimg.jpg';
+        
     }
 }
 

@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="side-menu">
+                        <a href="{{ route('sales') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="shopping-cart"></i> </div>
                             <div class="side-menu__title"> Ventas </div>
                         </a>
@@ -49,10 +49,11 @@
                             <div class="side-menu__title"> Reportes </div>
                         </a>
                     </li>
+                    <div class="side-nav__devider my-6"></div>
                     <li>
-                        <a href="#" class="side-menu">
+                        <a href="{{ route('settings') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
-                            <div class="side-menu__title"> Configuracion </div>
+                            <div class="side-menu__title"> Configuraciones </div>
                         </a>
                     </li>
                 </ul>

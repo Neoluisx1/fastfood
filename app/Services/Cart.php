@@ -11,124 +11,174 @@ class Cart {
     protected Collection $cart;
 
     public function __construct(){
-        if(session()->has('cart')){
-            $this->cart = session('cart');
+        if(session()->has("cart")){
+            $this->cart = session("cart");
         }else{
             $this->cart = new Collection;
         }
     }
 
-    public function getContent(): Collection{
-        return $this->cart->sorBy(['name',['name','asc']]);
+    // obtener contenido del carrito     
+    public function getContent(): Collection
+    {
+            return $this->cart->sortBy(['name', ['name', 'asc']]);
     }
 
-    protected function save(): void{
-        session()->put('cart', $this->cart);
+    // guardar el carrito en sesion
+    protected function save(): void
+    {
+        session()->put("cart", $this->cart);
         session()->save();
     }
 
-    public function addProduct($product, $cant = 1, $change = 0): void{
-        $pre = Arr::add($product, 'qty', $cant);
+
+    // agregar un producto al carrito    
+    public function addProduct(Product $product, $cant = 1, $changes = 0): void
+    {       
+        $pre = Arr::add($product, 'qty', 1);
         $this->validate($pre);
         $this->cart->push($pre);
         $this->save();
     }
 
-    public function addChanges($id, $changes){
+    // agregar cambios a un producto / platillo
+    public function addChanges($id, $changes)
+    {      
         $mycart = $this->getContent();
-        $oldItem = $mycart->where('id',$id)->first();
-        $newItem = $oldItem;
+        $oldItem = $mycart->where('id', $id)->first();
+        $newItem = $oldItem;        
         $newItem->changes = $changes;
 
-        $this->removeProduct($newItem);
+        $this->removeProduct($id);
+        $this->addProduct($newItem);
+    }
+    public function removeChanges($id)
+    {
+        $mycart = $this->getContent();
+        $oldItem = $mycart->where('id', $id)->first();
+        $newItem = $oldItem;
+        $newItem->changes = '';
+        $this->removeProduct($id);
         $this->addProduct($newItem);
     }
 
-    public function existsInCart($id): bool{
+
+
+    // validar si existe X producto en carrito
+    public function existsInCart(int $id): bool
+    {
         $mycart = $this->getContent();
         $cont = $mycart->where('id', $id)->count();
         $res = $cont > 0 ? true : false;
-
+        
         return $res;
     }
 
-    public function countInCart($id): int{
+    // cantidad de X producto agregada al carrito
+    public function countInCart(int $id): int
+    {
         $mycart = $this->getContent();
         $cont = $mycart->where('id', $id)->sum('qty');
         return $cont;
     }
-    public function updateQuantity($id, $cant = 1){
+
+
+    // incrementar cantidad de X producto en carrito
+    public function updateQuantity(int $id, $cant = 1): void
+    {
         $mycart = $this->getContent();
         $oldItem = $mycart->where('id', $id)->first();
         $newItem = $oldItem;
         $newItem->qty += $cant;
-
         $this->removeProduct($id);
-        $this->addProduct($newItem);
+        $this->addProduct($newItem); 
     }
-    public function decreaseQuantity($id, $cant = 1 ){
+
+    // decrementar cantidad de X producto en carrito
+    public function decreaseQuantity($id, $cant = 1)
+    {
         $mycart = $this->getContent();
         $oldItem = $mycart->where('id', $id)->first();
         $newItem = $oldItem;
         $newItem->qty -= $cant;
-
         $this->removeProduct($id);
-        if($newItem->qty > 0) $this->addProduct($newItem);
+        if ($newItem->qty > 0) $this->addProduct($newItem);
     }
-    public function replaceQuantity($id, $cant = 1): void{
+
+    // reemplazar cantidad de X producto en carrito
+    public function replaceQuantity($id, $cant = 1): void
+    {        
         $mycart = $this->getContent();
         $oldItem = $mycart->where('id', $id)->first();
         $newItem = $oldItem;
         $newItem->qty = $cant;
         $this->validate($newItem);
-
         $this->removeProduct($id);
         $this->addProduct($newItem);
     }
-    public function removeProduct($id): void{
-        $this->cart = $this->cart->reject(function(Product $product) use ($id){
+
+
+
+    // eliminar producto del carrito    
+    public function removeProduct(int $id): void
+    {
+        $this->cart = $this->cart->reject(function (Product $product) use ($id) {
             return $product->id === $id;
         });
         $this->save();
     }
-    public function totalAmount(){
+
+    // obtenemos total en carrito     
+    public function totalAmount()
+    {
+
         $amount = $this->cart->sum(function ($product) {
             return ($product->price * $product->qty);
         });
         return $amount;
     }
-    public function hasProducts(): int{
+
+
+
+    // obtenemos el cantidad de productos en carrito
+    public function hasProducts(): int
+    {
         return $this->cart->count();
     }
-    public function totalItems(): int{
-        $items = $this->cart->sum(function ($product){
+
+    // obtenemos sumatoria de productos en carrito
+    public function totalItems(): int
+    {
+
+        $items = $this->cart->sum(function ($product) {
             return $product->qty;
         });
         return $items;
     }
-    public function removeChanges($id){
-        $mycart = $this->getContent();
-        $oldItem = $mycart->where('id',$id)->first();
-        $newItem = $oldItem;
-        $newItem->changes = '';
 
-        $this->removeProduct($id);
-        $this->addProduct($newItem);
-    }
-    public function clear(){
+    // vaciar carrito
+    public function clear(): void
+    {
         $this->cart = new Collection;
         $this->save();
     }
-    protected function validate($item){
-        $validator = Validator::make($item->toArray(),[
+
+
+
+    // validación antes de agregar item al carrito
+    protected function validate($item)
+    {
+        $validator = Validator::make($item->toArray(), [
             'id' => 'required',
-            'precio' => 'required|numeric',
+            'price' => 'required|numeric',
             'qty' => 'required|numeric|min:1',
-            'name' => 'required'
+            'name' => 'required',
         ]);
-        if($validator->fails()){
+
+        if ($validator->fails()) {
             throw new \ErrorException($validator->messages());
         }
+
         return $item;
     }
 }

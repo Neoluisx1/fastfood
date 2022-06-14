@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Image;
 use App\Models\Category;
 use Livewire\Component;
 
+use Livewire\WithPagination;
+use Livewire\WithFileUploads; //subir imagenes
+
 class Categories extends Component
 {
+    use WithPagination;
+    use WithFileUploads;
     public $form=false, $name='',$selected_id=0,$photo='';
     public $action='Listado', $componentName='Categorias',$search='';
     private $pagination = 5;
-    protected $paginationTheme='talwind';
+    protected $paginationTheme='tailwind';
     public function render()
     {
         if(strlen($this->search)>0)
@@ -41,32 +47,56 @@ class Categories extends Component
         $this->resetUI();
         $this->noty(null,'close-modal');
     }
-    public function resetUI(){
-        $this->resetPage();
+    public function resetUI(){        
         $this->resetValidation();
+        $this->resetPage();
         $this->reset('name', 'selected_id', 'search', 'form' );
     }
 
     public $listeners=['resetUI', 'Destroy'];
 
     public function Store(){
+
+        sleep(1);
+
         $this->validate(Category::rules($this->selected_id), Category::$messages);
 
-        Category::updateOrCreate(['id'=>$this->selected_id],[
+        $category = Category::updateOrCreate(['id'=>$this->selected_id],[
             'name'=>$this->name,
+        ]); 
+        if (!empty($this->photo)) {
+            // delete all images in drive
+            $tempImg = $category->image->file;
+            if ($tempImg != null && file_exists('storage/categories/' . $tempImg)) {
+                unlink('storage/categories/' . $tempImg);
+            }
+            // delete relationship image from db
+            $category->image()->delete();
 
-        ]);
+            // generate random file name
+            $customFileName = uniqid() . '_.' . $this->photo->extension();
+            $this->photo->storeAs('public/categories', $customFileName);
 
+            // save image record
+            $img = Image::create([
+                'model_id' => $category->id,
+                'model_type' => 'App\Models\User',
+                'file' => $customFileName
+            ]);
+
+            // save relationship
+            $category->image()->save($img);
+        }       
         $this->noty($this->selected_id > 0 ? 'CAtegoria Actualizado' : 'Categoria Registrada' , 'noty', false, 'close-modal');
         $this->resetUI();
     }
     public function Destroy(Category $category){
-        if($category->orders->count()<1){
+        if($category->products->count() < 1){
             $category->delete();
-            $this->noty("El cliente <b>$category->name</b> fue eliminado");
+            $this->noty("La Categoria <b>$category->name</b> fue eliminada");
         }
         else{
-            $this->noty("El clietne tiene ventas relacioandas no se puede eliminar");
+            $this->noty("La Categoria <b>$category->name</b> tiene productos registrados");
         }
     }
 }

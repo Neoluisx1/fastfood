@@ -28,7 +28,7 @@
                             <td class="dark:border-dark-5 text-center">
                                 <div class="d-flex justify-content-center">
                                     @if($category->products->count() < 1)
-                                    <button class="btn btn-danger text-white border-0" onclick="destroy('categories','destroy',{{$category->id}})" type="button">
+                                    <button class="btn btn-danger text-white border-0" onclick="destroy('categories','Destroy',{{$category->id}})" type="button">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                     @endif
@@ -56,10 +56,10 @@
     </div>
     </div>
     @else
-@include('livewire.categories.form')
+        @include('livewire.categories.form')
     @endif
 
-    @include('livewire.sales.keyboard')
+        @include('livewire.sales.keyboard')
     <script>
         document.addEventListener('click', (e)=>{
             if(e.target.id == 'search'){
@@ -70,8 +70,9 @@
 
                 const inputSearch = document.getElementById('search')
                 inputSearch.addEventListener('change',(e)=>{
-                @this.search=e.target.value})
+                @this.search=e.target.value
+                })
             }
-        })
+        })        
     </script>
 </div>

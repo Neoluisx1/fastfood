@@ -1,16 +1,17 @@
 <?php
 namespace App\Traits;
 
+use App\Models\Product;
 use App\Services\Cart;
 
 trait CartTrait {
     public function getContentCart(){
         $cart = new Cart;
-        return $cart->getContent()()->sortBy('name');
+        return $cart->getContent()->sortBy('name');
     }
     public function getTotalCart(){
         $cart = new Cart;
-        return $cart->totalAmount();
+        return $cart->totalAmount(false);
     }
     public function countInCart($id){
         $cart = new Cart;
@@ -20,15 +21,15 @@ trait CartTrait {
         $cart = new Cart;
         return $cart->totalItems();
     }
-    public function updateQtyCart($product, $cant = 1){
+    public function updateQtyCart(Product $product, $cant = 1){
         $cart = new Cart;
         $cart->updateQuantity($product->id, $cant);
         $this->noty('Cantidad Actualizada');
     }
-    public function addProductCart($product, $cant = 1, $changes = ''){
+    public function addProductToCart(Product $product, $cant = 1, $changes = ''){
         $cart = new Cart;
         if($cart->existsInCart($product->id)){
-            $cart->addProduct($product, $cant, $changes);
+            $cart->updateQuantity($product->id, $cant);
             $this->noty('Cantidad Actualizada');
         }else{
             $cart->addProduct($product, $cant, $changes);
@@ -39,7 +40,7 @@ trait CartTrait {
         $cart = new Cart;
         return $cart->existsInCart($id);
     }
-    public function replaceQuantityCart($id,$cant = 1){
+    public function replaceQuantyCart($id,$cant = 1){
         $cart = new Cart;
         $cart->replaceQuantity($id,$cant);
     }
@@ -52,9 +53,14 @@ trait CartTrait {
         $cart = new Cart;
         $cart->removeProduct($id);
     }
-    public function addChangesProduct($id, $changes){
+    public function addChanges2Product($id, $changes){
         $cart = new Cart;
         $cart->addChanges($id, $changes);
+    }
+    public function clearChanges($id)
+    {
+        $cart = new Cart;
+        $cart->removeChanges($id);
     }
     public function clearCart(){
         $cart = new Cart;

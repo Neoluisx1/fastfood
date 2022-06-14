@@ -9,7 +9,22 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function details(){
+    protected $fillable = ['total', 'shipping', 'items', 'discount', 'cash','type', 'status', 'user_id', 'customer_id', 'notes', 'delivery_date'];
+
+    // relationships
+    public function details()
+    {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class)->withDefault(); 
+        //ponemos withDefault para las ventas que no tienen cliente y no marque error object
     }
 }
