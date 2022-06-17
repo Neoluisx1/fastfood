@@ -21,16 +21,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get(uri:'categories', action:Categories::class)->name(name:'categories');
-Route::get(uri:'products', action:Products::class)->name(name:'products');
-Route::get(uri:'customers', action:Customers::class)->name(name:'customers');
-Route::get(uri:'users', action:Users::class)->name(name:'users');
-Route::get(uri:'sales', action:Sales::class)->name(name:'sales');
-Route::get(uri:'reports', action:Reports::class)->name(name:'reports');
+Route::get(uri:'categories', action:Categories::class)->name(name:'categories')->middleware('auth');;
+Route::get(uri:'products', action:Products::class)->name(name:'products')->middleware('auth');;
+Route::get(uri:'customers', action:Customers::class)->name(name:'customers')->middleware('auth');;
+Route::get(uri:'users', action:Users::class)->name(name:'users')->middleware('auth');;
+Route::get(uri:'sales', action:Sales::class)->name(name:'sales')->middleware('auth');;
+Route::get(uri:'reports', action:Reports::class)->name(name:'reports')->middleware('auth');;
 
-Route::get(uri:'settings', action:Settings::class)->name(name:'settings');
+Route::get(uri:'settings', action:Settings::class)->name(name:'settings')->middleware('auth');;
 
-Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash');
+Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash')->middleware('auth');;
 
 
 Route::get('/', function () {

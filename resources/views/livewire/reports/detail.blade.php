@@ -28,6 +28,9 @@
                                             <tr class="dark:bg-dark-1 text-lg {{$loop->index % 2 > 0 ? 'bg-gray-200' : ''}}">
                                                 <td class="border-b dark:border-dark-5">
                                                     {{ ($detail->product->name) }}
+                                                    <div>
+                                                        <small>{{$detail->changes}}</small>
+                                                    </div>
                                                 </td>
                                                 <td class="border-b dark:border-dark-5 text-center">
                                                     {{number_format($detail->price,2)}}

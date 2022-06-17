@@ -151,8 +151,11 @@
         </div>
         <div class="mt-8">
             @if($totalCart >0 && ($cash>= $totalCart))
-            <button wire:loading.attr="disabled" wire:target="storeSale" wire:click="storeSale(false)" class="btn btn-primary w-full"><i class="fas fa-database mr-2"></i> Guardar Venta</button>
-            <button wire:loading.attr="disabled" wire:target="storeSale" wire:click.prevent="storeSale(true)" class="btn btn-outline-primary w-full mt-5"><i class="fas fa-receipt mr-2"></i> Guardar e Imprimir</button>
+            <div class="">
+                <button wire:loading.attr="disabled" wire:target="storeSale" wire:click.prevent="storeSale()" class="btn btn-primary w-full"><i class="fas fa-database mr-2"></i> Guardar Venta</button>
+            </div>
+                <button wire:loading.attr="disabled" wire:target="storeSale" wire:click.prevent="storeSale(true)" class="btn btn-outline-primary w-full mt-5"><i class="fas fa-receipt mr-2"></i> Guardar e Imprimir</button>
+            
             @endif
  
             @if($totalCart >0)
