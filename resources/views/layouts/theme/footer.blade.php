@@ -14,7 +14,7 @@
             text: event.detail.msg,
             actionText: 'CERRAR',
             actionTectColor: '#fff',
-            backgroundColor: event.detail.type == 'success' ? '#2187EC' : '#e7515a',
+            backgroundColor: event.detail.type === 'success' ? '#2187EC' : '#e7515a',
             pos: 'top-right'
         });
     })

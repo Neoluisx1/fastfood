@@ -15,7 +15,7 @@ class Reports extends Component
     use WithPagination;
     use PrinterTrait;
 
-    public $search, $startDate, $endDate, $userId = 'TODOS', $details = []; 
+    public $search, $startDate, $endDate, $userId = 'TODOS', $details = [];
     private $pagionation = 6;
 
     public function render()

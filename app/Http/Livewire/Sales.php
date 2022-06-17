@@ -164,7 +164,9 @@ public function getProductsByCategory($category_id)
             if ($this->customerSelected != 'Seleccionar Cliente') {
                 $this->customer_id = Customer::where('name', $this->customerSelected)->first()->id;
             } else {
-                 $this->customer_id = Customer::where('name', 'Mostrador')->first()->id;
+                 //$this->customer_id = Customer::where('name', 'Mostrador')->first()->id;
+                $this->noty('Selecciona un Cliente', 'noty', 'error');
+                return;
             }
             $sale = Order::create([
                 'total' => $this->getTotalCart(),
