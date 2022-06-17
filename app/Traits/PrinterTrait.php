@@ -152,7 +152,7 @@ trait PrinterTrait
         /* Name of shop */
         $printer->setJustification(Printer::JUSTIFY_CENTER);
         $logo = EscposImage::load($settings->logo);
-        $printer->graphics($logo);
+        $printer->graphics($logo, Printer::IMG_DOUBLE_WIDTH);
         
         $printer->setTextSize(3, 3);
         $printer->text("$settings->name \n");
