@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
                    'order_id' => $order->id,
                    'product_id' => Product::all()->random()->id,
                    'quantity' => $order->items,
+                   'changes' =>0,
                    'price' => $order->total/$order->items,
                ]);
             });

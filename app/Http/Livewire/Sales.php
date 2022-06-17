@@ -22,18 +22,18 @@ class Sales extends Component
     use CartTrait;
     use PrinterTrait;
 
-   
+
     public $orderDetails = [], $search, $cash, $searchcustomer, $currentStatusOrder, $order_selected_id, $customer_id = null, $changes, $customerSelected = 'Seleccionar Cliente';
-    
+
     // mostrar y activar panels
     public $showListProducts = false, $tabProducts = true, $tabCategories = false;
 
     // colecctions
     public $productsList = [], $customers = [];
-    
+
     // info carrito
     public  $totalCart = 0, $itemsCart = 0, $contentCart = [];
-    
+
     // producto seleccionado
     public $productIdSelected, $productChangesSelected, $productNameSelected, $changesProduct;
 
@@ -41,16 +41,16 @@ class Sales extends Component
      protected $paginationTheme = 'bootstrap';
 
 
-    
-    public function render()
-    {      
 
-        
+    public function render()
+    {
+
+
         if (strlen($this->searchcustomer) > 0)
             $this->customers = Customer::where('name', 'like', "%{$this->searchcustomer}%")->orderBy('name', 'asc')->get()->take(5);
         else
-            $this->customers = Customer::orderBy('name', 'asc')->get()->take(5);            
-       
+            $this->customers = Customer::orderBy('name', 'asc')->get()->take(5);
+
 
         $this->totalCart = $this->getTotalCart();
         $this->itemsCart = $this->getItemsCart();
@@ -66,7 +66,7 @@ class Sales extends Component
     {
         $this->reset('tabProducts', 'cash', 'showListProducts', 'tabCategories', 'search', 'searchcustomer', 'customer_id', 'customerSelected', 'totalCart', 'itemsCart', 'productIdSelected', 'productChangesSelected', 'productNameSelected', 'changesProduct');
     }
-    
+
 
     public function updatedCustomerSelected()
     {
@@ -74,7 +74,7 @@ class Sales extends Component
     }
 
 
-    
+
 
     public function setTabActive($tabName)
     {
@@ -104,7 +104,7 @@ public function getProductsByCategory($category_id)
     // operaciones con el carrito
     public function add2Cart(Product $product)
     {
-        $this->addProductToCart($product, 1, $this->changes);        
+        $this->addProductToCart($product, 1, $this->changes);
         $this->changes = '';
     }
 
@@ -118,7 +118,7 @@ public function getProductsByCategory($category_id)
     // actualizar cantidad item en carrito
     public function updateQty(Product $product, $cant = 1)
     {
-        if($cant + $this->countInCart($product->id) > $product->stock) 
+        if($cant + $this->countInCart($product->id) > $product->stock)
         {
             $this->noty('STOCK INSUFICIENTE','noty','error');
             $this->dispatchBrowserEvent('refresh');

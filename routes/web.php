@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth'])->group(function(){
+
 
 Route::get(uri:'categories', action:Categories::class)->name(name:'categories');
 Route::get(uri:'products', action:Products::class)->name(name:'products');
@@ -31,14 +33,12 @@ Route::get(uri:'reports', action:Reports::class)->name(name:'reports');
 Route::get(uri:'settings', action:Settings::class)->name(name:'settings');
 
 Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash');
-
+});
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';
