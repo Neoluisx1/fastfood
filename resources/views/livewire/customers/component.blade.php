@@ -25,7 +25,7 @@
                                 <h6 class="mb-1 font-medium">{{$customer->name}}</h6>
                             </td>
                             <td class="dark:border-dark-5">
-                                <h6 class="mb-1 font-medium">{{$customer->nit}}</h6>
+                                <h6 class="mb-1 font-medium">{{$customer->ci_nit}}</h6>
                             </td>
                             <td class="dark:border-dark-5">
                                 <h6 class="mb-1 font-medium">{{$customer->phone}}</h6>
@@ -67,16 +67,12 @@
     </div>
     </div>
     @else
-@include('livewire.customers.form')
+        @include('livewire.customers.form')
     @endif
 
     @include('livewire.sales.keyboard')
-    <script>
-       /* const inputSearch = document.getElementById('search')
-        inputSearch.addEventListener('change',(e)=>{
-            @this.search=e.target.value
-        })*/
-        document.addEventListener('click', (e)=>{
+    <script>       
+        document.addEventListener('click',(e) => {            
             if(e.target.id == 'search'){
                 KioskBoard.run('#search',{})
 
@@ -85,9 +81,9 @@
 
                 const inputSearch = document.getElementById('search')
                 inputSearch.addEventListener('change',(e)=>{
-                @this.search=e.target.value})
+                @this.search = e.target.value})
             }
-        })
-    </script>
+        })        
+    </script>    
 </div>
 

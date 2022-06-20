@@ -139,9 +139,10 @@
             closeModalUser()
         })
         
-        const inputSearch = document.getElementById('user-search')
-        inputSearch.addEventListener('change',(e)=>{
-            @this.search=e.target.value
-        })        
+        const inputSearch = document.getElementById('usersearch')
+        inputSearch.addEventListener('change', (e) => {
+            @this.usersearch=e.target.value
+        })   
+           
     </script>
 </div>

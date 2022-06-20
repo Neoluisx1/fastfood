@@ -9,8 +9,6 @@ use App\Models\Image;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 
-
-
 class Categories extends Component
 {
 
@@ -37,7 +35,7 @@ class Categories extends Component
         $this->form = true;
 
     }
-    public function noty($msg, $eventName = 'Noty', $reset = true, $action = ''){
+    public function noty($msg, $eventName = 'noty', $reset = true, $action = ''){
         $this->dispatchBrowserEvent($eventName, ['msg' => $msg, 'type' => 'success', 'action' => $action]);
         if($reset) $this->resetUI();
     }

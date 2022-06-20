@@ -98,4 +98,8 @@ class User extends Authenticatable
     public function sales(){
         return $this->hasMany(Order::class);
     }
+
+    public function branchoffices(){
+        return $this->belongsTo(BranchOffice::class);
+    }
 }

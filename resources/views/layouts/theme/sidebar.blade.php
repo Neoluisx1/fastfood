@@ -56,5 +56,11 @@
                             <div class="side-menu__title"> Configuraciones </div>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('branch_offices') }}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
+                            <div class="side-menu__title"> Sucursales </div>
+                        </a>
+                    </li>
                 </ul>
             </nav>

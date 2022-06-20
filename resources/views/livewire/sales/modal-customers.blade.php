@@ -17,7 +17,7 @@
                                    
                                     <div class="input-group">
                                         <div id="input-group-3" class="input-group-text"><i class="fas fa-search"></i></div>
-                                        <input wire:model="searchcustomer" id="customer-search" type="text" class="form-control form-control-lg kioskboard" placeholder="Buscar" >
+                                        <input wire:model="searchcustomer" id="customer-search" type="text" class="form-control form-control-lg kioskboard" placeholder="Buscar por C.I. o por NIT" >
                                     </div>
 
 
@@ -35,12 +35,20 @@
                                                     {{$customer->name}}
                                                 </td>
                                                 <td>
+                                                    {{$customer->ci_nit}}
+                                                </td>
+                                                <td>
                                                     <button wire:click.prevent="$set('customerSelected', '{{$customer->name}}')" class="btn btn-outline-primary">Seleccionar</button>
                                                 </td>
                                             </tr>
                                             @empty
                                             <tr>
                                                 <td colspan="5" class="text-center">NO HAY CLIENTES REGISTRADOS</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" class="text-center">
+                                                    <button onclick="openModalAddCustomer()" class="btn btn-success mb-3">Registrar CLIENTE</button>
+                                                </td>
                                             </tr>
                                             @endforelse
                                         </tbody>

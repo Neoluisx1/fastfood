@@ -1,4 +1,4 @@
-<dvi class="intro-y col-span-12">
+<div class="intro-y col-span-12">
     <div class="intro-y box">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
@@ -17,9 +17,9 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="form-label">Nit</label>
-                                <input wire:model="nit" id="nit" type="text" data-kioskboard-type="numpad" class="form-control form-control-lg border-start-0 kioskboard" maxlength="11" placeholder="Ej..60457578">
-                                @error('nit')
+                                <label class="form-label">Nit o C.I.</label>
+                                <input wire:model="ci_nit" id="ci_nit" type="text" data-kioskboard-type="numpad" class="form-control form-control-lg border-start-0 kioskboard" maxlength="11" placeholder="Ej..60457578">
+                                @error('ci_nit')
                                 <x-alert msg="{{$message}}" />
                                 @enderror
                             </div>
@@ -34,6 +34,13 @@
                     </div>
                     <div class="mt-3">
                         <div class="sm:grid grid-cols-3 gap-5">
+                            <div>
+                                <label class="form-label">Direccion</label>
+                                <input wire:model="address" id="address" type="text" class="form-control form-control-lg border-start-0 kioskboard" maxlength="50" placeholder="Ej..Potosi">
+                                @error('address')
+                                <x-alert msg="{{$message}}" />
+                                @enderror
+                            </div>
                             <div>
                                 <label class="form-label">Ciudad</label>
                                 <input wire:model="city" id="city" type="text" class="form-control form-control-lg border-start-0 kioskboard" maxlength="50" placeholder="Ej..Potosi">
@@ -58,22 +65,30 @@
                 </div>
             </div>
     </div>
-</dvi>
-<script>
-    KioskBoard.run('#kioskboard',{})
-    document.querySelectorAll(".kioskboard").forEach(i=>i.addEventListener("change",e=>{
-        switch(e.currentTarget.id){
-            case 'name':
-                @this.name = e.target.value
-                break
-                @this.nit = e.target.value
-                break
-                @this.phone = e.target.value
-                break
-                @this.city = e.target.value
-                break
-                @this.mail = e.target.value
-                break
-        }
-    }))
-</script>
+    <script>
+        KioskBoard.run('.kioskboard-disabled',{})
+        document.querySelectorAll(".kioskboard").forEach(i=>i.addEventListener("change",e=>{
+            switch(e.currentTarget.id){
+                case 'name':
+                    @this.name = e.target.value
+                    break
+                case 'ci_nit':
+                    @this.ci_nit = e.target.value
+                    break
+                case 'phone':
+                    @this.phone = e.target.value
+                    break
+                case 'city':
+                    @this.city = e.target.value
+                    break
+                case 'mail':
+                    @this.mail = e.target.value
+                    break 
+                case 'address':
+                    @this.address = e.target.value
+                    break                    
+            }
+        }))
+    </script>
+    
+</div>

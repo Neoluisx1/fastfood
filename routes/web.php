@@ -4,6 +4,7 @@ use App\Http\Livewire\Users;
 use App\Http\Livewire\Products;
 use App\Http\Livewire\Customers;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Branchoffices;
 use App\Http\Livewire\Sales;
 use App\Http\Livewire\Reports;
 use App\Http\Livewire\Settings;
@@ -23,12 +24,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function(){
 
 
-Route::get(uri:'categories', action:Categories::class)->name(name:'categories')->middleware('auth');;
-Route::get(uri:'products', action:Products::class)->name(name:'products')->middleware('auth');;
-Route::get(uri:'customers', action:Customers::class)->name(name:'customers')->middleware('auth');;
-Route::get(uri:'users', action:Users::class)->name(name:'users')->middleware('auth');;
-Route::get(uri:'sales', action:Sales::class)->name(name:'sales')->middleware('auth');;
-Route::get(uri:'reports', action:Reports::class)->name(name:'reports')->middleware('auth');;
+Route::get(uri:'categories', action:Categories::class)->name(name:'categories')->middleware('auth');
+Route::get(uri:'products', action:Products::class)->name(name:'products')->middleware('auth');
+Route::get(uri:'customers', action:Customers::class)->name(name:'customers')->middleware('auth');
+Route::get(uri:'users', action:Users::class)->name(name:'users')->middleware('auth');
+Route::get(uri:'sales', action:Sales::class)->name(name:'sales')->middleware('auth');
+Route::get(uri:'reports', action:Reports::class)->name(name:'reports')->middleware('auth');
+Route::get(uri:'branch_offices', action:Branchoffices::class)->name(name:'branch_offices')->middleware('auth');
 
 Route::get(uri:'settings', action:Settings::class)->name(name:'settings')->middleware('auth');
 Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash')->middleware('auth');

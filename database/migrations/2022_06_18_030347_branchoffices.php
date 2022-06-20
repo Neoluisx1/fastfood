@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('branchoffices', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('profile',['Admin','Employee'])->default('Admin');
-            $table->rememberToken();
-            $table->foreignId('branchiffices_id')->constrained();
+            $table->string('name',65);
+            $table->string('phone',10)->nullable();
+            $table->string('address',255)->nullable();
+            $table->string('leyend',50)->nullable();
+            $table->string('logo',40)->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 };

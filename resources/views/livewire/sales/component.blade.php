@@ -172,6 +172,7 @@
  @include('livewire.sales.modal-changes')
  @include('livewire.sales.modal-customers')
  @include('livewire.sales.script')
+ @include('livewire.sales.modal-form')
  
  
  

@@ -22,8 +22,9 @@ class Sales extends Component
     use CartTrait;
     use PrinterTrait;
 
+    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '';
 
-    public $orderDetails = [], $search, $cash, $searchcustomer, $currentStatusOrder, $order_selected_id, $customer_id = null, $changes, $customerSelected = 'Seleccionar Cliente';
+    public $orderDetails = [], $search, $cash, $searchcustomer, $selected_id,$currentStatusOrder, $order_selected_id, $customer_id = null, $changes, $customerSelected = 'Seleccionar Cliente';
 
     // mostrar y activar panels
     public $showListProducts = false, $tabProducts = true, $tabCategories = false;
@@ -47,9 +48,9 @@ class Sales extends Component
 
 
         if (strlen($this->searchcustomer) > 0)
-            $this->customers = Customer::where('name', 'like', "%{$this->searchcustomer}%")->orderBy('name', 'asc')->get()->take(5);
+            $this->customers = Customer::where('ci_nit', 'like', "%{$this->searchcustomer}%")->orderBy('name', 'asc')->get()->take(5);
         else
-            $this->customers = Customer::orderBy('name', 'asc')->get()->take(5);
+            $this->customers = Customer::orderBy('ci_nit', 'asc')->get()->take(5);
 
 
         $this->totalCart = $this->getTotalCart();
@@ -64,9 +65,25 @@ class Sales extends Component
 
     public function resetUI()
     {
-        $this->reset('tabProducts', 'cash', 'showListProducts', 'tabCategories', 'search', 'searchcustomer', 'customer_id', 'customerSelected', 'totalCart', 'itemsCart', 'productIdSelected', 'productChangesSelected', 'productNameSelected', 'changesProduct');
+        $this->reset('name','ci_nit','phone','city','address','mail','tabProducts', 'cash', 'showListProducts', 'tabCategories', 'search', 'searchcustomer', 'customer_id', 'customerSelected', 'totalCart', 'itemsCart', 'productIdSelected', 'productChangesSelected', 'productNameSelected', 'changesProduct');
     }
 
+    public function Store(){
+        $this->validate(Customer::rules($this->selected_id), Customer::$messages);
+
+        Customer::updateOrCreate(['id'=>$this->selected_id],[
+            'name'=>$this->name,
+            'ci_nit'=>$this->ci_nit,
+            'phone'=>$this->phone,
+            'city'=>$this->city,
+            'address'=>$this->address,
+            'mail'=>$this->mail,
+        ]);
+
+        $this->noty($this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Registrado' , 'noty', false, 'closeModalAddCustomer');
+        $this->resetUI();
+        $this->dispatchBrowserEvent('closeModalAddCustomer');
+    }
 
     public function updatedCustomerSelected()
     {
@@ -234,5 +251,27 @@ public function getProductsByCategory($category_id)
         $this->clearCart();
         $this->resetUI();
         $this->noty('VENTA CANCELADA');
+    }
+
+
+
+    public function Store2(){
+
+        $this->validate(Customer::rules($this->selected_id), Customer::$messages);
+
+        $cust = Customer::updateOrCreate(['id'=>$this->selected_id],[
+            'name'=>$this->name,
+            'ci_nit'=>$this->ci_nit,
+            'phone'=>$this->phone,
+            'city'=>$this->city,
+            'address'=>$this->address,
+            'mail'=>$this->mail,
+            'notes'=>$this->notes,
+        ]);
+        
+        $this->noty($this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Registrado' , 'noty', false, 'closeModalAddCustomer');
+        $this->resetUI();
+        $this->searchcustomer = $cust->ci_nit;
+        $this->dispatchBrowserEvent('closeModalAddCustomer');
     }
 }

@@ -15,7 +15,7 @@ class Reports extends Component
     use WithPagination;
     use PrinterTrait;
 
-    public $search, $startDate, $endDate, $userId = 'TODOS', $details = [];
+    public $usersearch, $startDate, $endDate, $userId = 'TODOS', $details = [];
     private $pagionation = 6;
 
     public function render()
@@ -51,8 +51,8 @@ class Reports extends Component
     }
 
     public function loadUsers(){
-        if(strlen($this->search) > 0 ){
-            $users = User::where('name'.'like',"%{$this->search}%")
+        if(strlen($this->usersearch) > 0 ){
+            $users = User::where('name','like',"%{$this->usersearch}%")
             ->orderBy('name','asc')
             ->get()->take(5);
         }else{

@@ -18,7 +18,7 @@
             pos: 'top-right'
         });
     })
-    function destroy(componentName, methodName = 'destroy', rowId){
+    function destroy(componentName, methodName = 'Destroy', rowId){
         swal({
             title: 'Confirmas eliminar el Registro',
             text: "",
