@@ -1,6 +1,6 @@
 <div class="top-bar">
                     <!-- BEGIN: Breadcrumb -->
-                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="http://infinity.com">Nombre</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active">Infinity</a> </div>
+                    <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="http://infinity.com"></a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active"></a> </div>
                     <!-- END: Breadcrumb -->
                     <!-- BEGIN: Account Menu -->
                     <div class="intro-x dropdown w-8 h-8">

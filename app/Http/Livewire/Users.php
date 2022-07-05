@@ -5,12 +5,13 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads; //subir imagenes
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Branchoffice;
 
 class Users extends Component
 {
     use WithPagination;
 
-    public $name = '', $email = '', $password = '', $temppass='', $selected_id = 0, $search ='', $profile = 'elegir', $componentName = 'USUARIOS', $form = false, $action='Listado';
+    public $name = '', $email = '', $password = '', $temppass='', $selected_id = 0, $search ='', $profile = 'elegir', $componentName = 'USUARIOS', $form = false, $action='Listado', $branchoffice = '';
     
     protected $paginationTheme = 'tailwind';
 
@@ -29,6 +30,7 @@ class Users extends Component
         }
         return view('livewire.users.component',[
             'users' => $users,
+            'branchoffices' => Branchoffice::orderBy('id','asc')->get(),
         ])
         ->layout('layouts.theme.app');
     }
@@ -58,7 +60,8 @@ class Users extends Component
         $this->email = $user->email;
         $this->profile = $user->profile;
         $this->password = null;
-        $this->temppass = $user->password;        
+        $this->temppass = $user->password;    
+        $this->branchoffice = $user->branchoffice_id;
         $this->form = true;
         $this->action = 'Editar';
     }
@@ -71,6 +74,7 @@ class Users extends Component
                 'name' => $this->name,
                 'email' => $this->email,
                 'profile' => $this->profile,
+                'branchoffice_id' => $this->branchoffice,
                 'password' => strlen($this->password) > 0 ? bcrypt($this->password) : $this->temppass,
         ]);
         $this->noty($this->selected_id > 0 ? 'Usuario Actulizado': 'Usuario Registrado Exitosamente');

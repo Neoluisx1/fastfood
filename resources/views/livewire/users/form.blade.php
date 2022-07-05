@@ -8,7 +8,7 @@
         <div class="p-5">
             <div class="preview">
                 <div class="mt-3">
-                    <div class="sm:grid grid-cols-3 gap-5">
+                    <div class="sm:grid grid-cols-3 gap-4">
                         <div>
                             <label for="form-label">NOMBRE</label>
                             <input type="text" wire:model="name" id="name" class="form-control form-control-lg border-start-0 kioskboard" maxlength="225" placeholder="Eje: Juan Choque">
@@ -30,24 +30,36 @@
                                 <x-alert msg="{{ $message }}"/>
                             @enderror
                         </div>
-                        <div class="grid grid-cols-6">
-                            <div class="col-end-2 bg-amber-500">
-                                <label for="" class="form-label">PERFIL</label>
-                                <select wire:model="profile" class="form-select form-select-lg sm:mr-2" id="">
-                                    <option value="elegir">Elegir un Perfil</option>
-                                    <option value="Admin">Administrador</option>
-                                    <option value="Employee">Empleado</option>
-                                </select>
-                                @error('profile')
+                    </div>
+                    <div class="sm:grid grid-cols-3 gap-4 mt-5">
+                        <div class="bg-amber-500">
+                            <label for="" class="form-label">PERFIL</label>
+                            <select wire:model="profile" class="form-select form-select-lg sm:mr-2" id="">
+                                <option value="elegir">Elegir un Perfil</option>
+                                <option value="Admin">Administrador</option>
+                                <option value="Employee">Empleado</option>
+                            </select>
+                            @error('profile')
                                 <x-alert msg="{{ $message }}"/>
                             @enderror
-                            </div>
                         </div>
-                        <div class="mt-5">
-                            <x-back/>
+                        <div class="bg-amber-500">
+                            <label for="" class="form-label">ASIGNAR A:</label>
+                            <select wire:model="branchoffice" class="form-select form-select-lg sm:mr-2" id="">
+                                <option value="elegir">Elegir una Sucursal</option>
+                                @foreach($branchoffices as $bo)
+                                    <option value="{{ $bo->id }}">{{ $bo->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('branchoffice')
+                                <x-alert msg="{{ $message }}"/>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center gap-5">
+                        <x-back/>
 
-                            <x-save/>
-                        </div>
+                        <x-save/>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@
 <script src="{{asset('dist/apexcharts.common.js')}}"></script>
 <script src="{{asset('dist/apexcharts.esm.js')}}"></script>
 <script src="{{asset('dist/apexcharts.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.jss"></script>
 
 <script>
     window.addEventListener('noty',event => {
