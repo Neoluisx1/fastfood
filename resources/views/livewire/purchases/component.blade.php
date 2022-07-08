@@ -3,7 +3,7 @@
     <div class="intro-y col-span-12">
         <div class="intro-y box">
         <h2 class="text-lg font-medium text-center text-theme-1 py-4">LISTA DE COMPRAS</h2>
-        <x-search />
+        <x-searched />
         <div class="p-5">
             <div class="preview">
                 <div class="overflow-x-auto">
@@ -84,5 +84,17 @@
         window.addEventListener('closeModalAddProvider', event => {
 			closeModalAddProvider()
          })
+        document.addEventListener('click',(e) => {            
+            if(e.target.id == 'search'){
+                KioskBoard.run('#search',{})
+
+                document.getElementById('search').blur()
+                document.getElementById('search').focus()
+
+                const inputSearch = document.getElementById('search')
+                inputSearch.addEventListener('change',(e)=>{
+                @this.search = e.target.value})
+            }
+        })  
     </script>
 </div>
