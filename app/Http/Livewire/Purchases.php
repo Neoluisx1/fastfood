@@ -22,7 +22,7 @@ class Purchases extends Component
 
     public $componentName = '', $action = '', $more_options = false;
 
-    private $pagination = 5;
+    private $pagination = 10;
 
     public function render()
     {
