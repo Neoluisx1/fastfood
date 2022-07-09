@@ -73,6 +73,6 @@
                 @this.search=e.target.value
                 })
             }
-        })        
+        })
     </script>
 </div>

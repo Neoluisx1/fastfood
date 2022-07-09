@@ -25,7 +25,7 @@ trait PrinterTrait
         $printer = new Printer($connector);
 
         //dd(dirname(public_path()));
-        $printer->setJustification(Printer::JUSTIFY_CENTER);       
+        $printer->setJustification(Printer::JUSTIFY_CENTER);
         $logo = EscposImage::load("logoo.png");
         $printer->bitImage($logo); //$printer -> graphics($logo);
 
@@ -110,13 +110,13 @@ trait PrinterTrait
         $impresora->text("NO. DE ARTICULOS $sale->items" . "\n");
 
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("TOTAL.......... $" . number_format($sale->total, 2) . "\n");
-        $impresora->text("EFECTIVO....... $" . number_format($sale->cash, 2) . "\n");
-        if (($sale->tcredit + $sale->tdebit) > 0) $impresora->text("TARJETA........ $" . number_format($sale->tcredit + $sale->tdebit, 2) . "\n");
-        if ($sale->points > 0) $impresora->text("M.USADO........ $" . number_format($sale->points, 2) . "\n");
-        if ($sale->points_added > 0) $impresora->text("M.DEPOSITADO... $" . number_format($sale->points_added, 2) . "\n");
-        if (strtoupper($sale->cliente->name) != 'PUBLICO') $impresora->text("SALDO MONEDERO. $" . number_format($sale->cliente->points, 2) . "\n");
-        $impresora->text("CAMBIO......... $" . number_format($sale->change, 2) . "\n");
+        $impresora->text("TOTAL.......... Bs." . number_format($sale->total, 2) . "\n");
+        $impresora->text("EFECTIVO....... Bs." . number_format($sale->cash, 2) . "\n");
+        if (($sale->tcredit + $sale->tdebit) > 0) $impresora->text("TARJETA........ Bs." . number_format($sale->tcredit + $sale->tdebit, 2) . "\n");
+        if ($sale->points > 0) $impresora->text("M.USADO........ Bs." . number_format($sale->points, 2) . "\n");
+        if ($sale->points_added > 0) $impresora->text("M.DEPOSITADO... Bs." . number_format($sale->points_added, 2) . "\n");
+        if (strtoupper($sale->cliente->name) != 'PUBLICO') $impresora->text("SALDO MONEDERO. Bs." . number_format($sale->cliente->points, 2) . "\n");
+        $impresora->text("CAMBIO......... Bs." . number_format($sale->change, 2) . "\n");
 
         $impresora->feed(3);
 
@@ -135,13 +135,13 @@ trait PrinterTrait
         $impresora->cut();
         $impresora->close();
 
-        
+
     }
-    
+
     public function PrintTicket($orderId)
     {
         $settings = Setting::first();
-        
+
         if(!$settings) return; // si no hay settings cancelamos la impresión
 
         // "EPSON-T20III";
@@ -153,25 +153,25 @@ trait PrinterTrait
         $printer->setJustification(Printer::JUSTIFY_CENTER);
         $logo = EscposImage::load($settings->logo);
         $printer->graphics($logo, Printer::IMG_DOUBLE_WIDTH);
-        
-        $printer->setTextSize(3, 3);
+
+        $printer->setTextSize(1, 1);
         $printer->text("$settings->name \n");
         $printer->selectPrintMode();
-        $printer->text("$settings->address \n");       
+        $printer->text("$settings->address \n");
         $printer->text("$settings->phone \n\n");
         $printer->feed();
 
 
         /* Title of receipt */
         $printer->setEmphasis(true);
-        $printer->text("Comprobante de Pago\n\n");
+        $printer->text("Comprobante de Pago\n");
         $printer->setEmphasis(false);
 
         // headers
         $order = Order::find($orderId);
         $printer->setJustification(Printer::JUSTIFY_LEFT);
-        $printer->text("Folio: #1425 \n");
-        $printer->text("Fecha: " . Carbon::parse($order->created_at)->format('d/m/Y h:m:s') ."\n");
+        $printer->text("Pedido: $order->num \n");
+        $printer->text("Fecha: " . Carbon::parse($order->created_at)->format('d/m/Y h:i:s A') ."\n");
         $printer->text("Cliente: ". $order->customer->name . "\n");
 
 
@@ -180,9 +180,9 @@ trait PrinterTrait
         $items = array();
         foreach($order->details as $detail){
             array_push($items, new item($detail->product->name .' x'.$detail->quantity, $detail->price));
-        }        
+        }
 
-        $itemsQty = new item('Articulos', $order->items);       
+        $itemsQty = new item('Articulos', $order->items);
         $cash = new item('Efectivo', $order->cash, true);
         $total = new item('Total', $order->total, true);
         $change = new item('Cambio', number_format(($order->cash - $order->total),2), true);
@@ -195,7 +195,7 @@ trait PrinterTrait
         $printer->setEmphasis(true);
         $concepts = new item('DESCRIPCION', 'IMPORTE', false);
         $printer->text($concepts->getAsString());
-        $printer->setEmphasis(false);       
+        $printer->setEmphasis(false);
         $printer->text("===============================================\n");
         foreach ($items as $item) {
             $printer->text($item->getAsString()); // for 58mm Font A / 32
@@ -204,31 +204,31 @@ trait PrinterTrait
         $printer->text("\n");
 
         /* change */
-        $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);     
+        $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
         $printer->text($itemsQty->getAsString());
-        $printer->feed();
+        //$printer->feed();
 
 
         /* cash and total */
-        $printer->text($cash->getAsString());       
+        $printer->text($cash->getAsString());
         $printer->setEmphasis(true);
         $printer->text($total->getAsString());
         $printer->setEmphasis(false);
-        $printer->feed();
+        //$printer->feed();
 
-        /* change */        
-        $printer->text($change->getAsString());        
+        /* change */
+        $printer->text($change->getAsString());
         $printer->selectPrintMode();
-        $printer->feed();
+        //$printer->feed();
 
 
         /* Footer */
     //  $date = "Monday 6th of April 2015 02:56:25 PM";
-        $printer->feed(2);
+        $printer->feed();
         $printer->setJustification(Printer::JUSTIFY_CENTER);
-        $printer->text("$settings->leyend \n");  
+        $printer->text("$settings->leyend \n");
         $printer->text("luisfax.com\n");
-        $printer->feed(2);
+        $printer->feed(1);
 
 
 
@@ -238,7 +238,7 @@ trait PrinterTrait
         $printer->setBarcodeHeight(60); //altura del barcode
         $printer->setBarcodeTextPosition(Printer::BARCODE_TEXT_BELOW);
         $printer->barcode($folio, Printer::BARCODE_CODE39); //especificamos el estándar code39 (7 dígitos)
-        $printer->feed(2); // generamos 2 espacios/saltos de linea en papel 
+        $printer->feed(); // generamos 2 espacios/saltos de linea en papel
 
 
 
@@ -264,7 +264,7 @@ trait PrinterTrait
 
 
     /* Cut the receipt and open the cash drawer */
-    $printer->cut();    
+    $printer->cut();
     $printer->close();
 
 
@@ -288,22 +288,22 @@ class item
         $this->dollarSign = $dollarSign;
     }
 
-    public function getAsString() 
+    public function getAsString()
     {
         // string str_pad($string, $length, $pad_string, $pad_type)
 
-        $rightCols = 10; 
+        $rightCols = 10;
         $leftCols  = 36;
-        
+
         if ($this->dollarSign) {
             $leftCols = $leftCols / 2 - $rightCols / 2;
         }
         $left = str_pad($this->name, $leftCols);
-        
+
 
         $sign = ($this->dollarSign ? '$ ' : '');
         $right = str_pad($sign . $this->price, $rightCols, ' ', STR_PAD_LEFT);
-        
+
 
         return "$left$right\n";
     }

@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['total', 'shipping', 'items', 'discount', 'cash','type', 'status', 'user_id', 'customer_id', 'notes', 'delivery_date'];
+    protected $fillable = ['total', 'shipping', 'items', 'discount', 'cash','type', 'status', 'user_id', 'customer_id', 'notes', 'delivery_date','pay','num'];
 
     // relationships
     public function details()
@@ -24,7 +24,7 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class)->withDefault(); 
+        return $this->belongsTo(Customer::class)->withDefault();
         //ponemos withDefault para las ventas que no tienen cliente y no marque error object
     }
 }

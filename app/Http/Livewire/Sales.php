@@ -22,7 +22,7 @@ class Sales extends Component
     use CartTrait;
     use PrinterTrait;
 
-    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '';
+    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '', $pay = 'elegir',$num;
 
     public $orderDetails = [], $search, $cash, $searchcustomer, $selected_id,$currentStatusOrder, $order_selected_id, $customer_id = null, $changes, $customerSelected = 'Seleccionar Cliente';
 
@@ -65,7 +65,7 @@ class Sales extends Component
 
     public function resetUI()
     {
-        $this->reset('name','ci_nit','phone','city','address','mail','tabProducts', 'cash', 'showListProducts', 'tabCategories', 'search', 'searchcustomer', 'customer_id', 'customerSelected', 'totalCart', 'itemsCart', 'productIdSelected', 'productChangesSelected', 'productNameSelected', 'changesProduct');
+        $this->reset('name','ci_nit','phone','city','address','mail','tabProducts', 'cash', 'showListProducts', 'tabCategories', 'search', 'searchcustomer', 'customer_id', 'customerSelected', 'totalCart', 'itemsCart', 'productIdSelected', 'productChangesSelected', 'productNameSelected', 'changesProduct','pay');
     }
 
     public function Store(){
@@ -76,6 +76,7 @@ class Sales extends Component
             'ci_nit'=>$this->ci_nit,
             'phone'=>$this->phone,
             'city'=>$this->city,
+            'pay'=> $this->pay,
             'address'=>$this->address,
             'mail'=>$this->mail,
         ]);
@@ -194,7 +195,9 @@ public function getProductsByCategory($category_id)
                 'type' => 'Web',
                 'status' => 'Pending',
                 'user_id' => Auth()->user()->id,
-                'customer_id' =>  $this->customer_id
+                'customer_id' =>  $this->customer_id,
+                'pay'=>$this->pay,
+                'num'=>$this->num
             ]);
 
             if ($sale) {
@@ -268,7 +271,7 @@ public function getProductsByCategory($category_id)
             'mail'=>$this->mail,
             'notes'=>$this->notes,
         ]);
-        
+
         $this->noty($this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Registrado' , 'noty', false, 'closeModalAddCustomer');
         $this->resetUI();
         $this->searchcustomer = $cust->ci_nit;

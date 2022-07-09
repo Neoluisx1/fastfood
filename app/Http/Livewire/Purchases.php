@@ -27,10 +27,10 @@ class Purchases extends Component
     public function render()
     {
         $references = Purchase::select('references')->orDerby('references','desc')->limit(10)->get();
-        $this->date_register = date('d-m-Y h:i:s', time());   
+        $this->date_register = date('d-m-Y h:i:s', time());
         $num = explode("/",$references);
-        $num_atual = sprintf('%04d',(int)($num[2])+1);        
-        $this->references = 'COMPRA'.date('Y/d', time()).'/'.$num_atual; 
+        $num_atual = sprintf('%04d',(int)($num[2])+1);
+        $this->references = 'COMPRA'.date('Y/d', time()).'/'.$num_atual;
         if(strlen($this->search) > 0){
             $info=Purchase::join('providers as p', 'p.id', 'purchases.provider_id')
             ->select('purchases.*', 'p.name as provider')
@@ -46,7 +46,7 @@ class Purchases extends Component
         ])->layout('layouts.theme.app');
     }
     public function Add(){
-        $this->resetUI();        
+        $this->resetUI();
         $this->date_register = date('m-d-Y h:i:s a', time());
         dd($this->date_register);
         $this->form = true;
@@ -64,10 +64,10 @@ class Purchases extends Component
         );
         $this->provider_id = $provider->id;
         $this->dispatchBrowserEvent('closeModalAddProvider');
-        $this->noty($this->selected_id > 0 ? 'Proveedor Actualizado' : 'Proveedor Registrado', 'noty', true, 'listado');        
+        $this->noty($this->selected_id > 0 ? 'Proveedor Actualizado' : 'Proveedor Registrado', 'noty', true, 'listado');
     }
-    
+
     public function noty($msg, $eventName = 'noty', $reset = true, $action = ''){
-        $this->dispatchBrowserEvent($eventName,['msg' => $msg, 'type' => 'success', 'action' => $action]);        
+        $this->dispatchBrowserEvent($eventName,['msg' => $msg, 'type' => 'success', 'action' => $action]);
     }
 }
