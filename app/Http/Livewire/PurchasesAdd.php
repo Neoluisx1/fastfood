@@ -32,8 +32,10 @@ class PurchasesAdd extends Component
     public function render()
     {
         $references = Purchase::select('references')->orDerby('references','desc')->limit(1)->get();
-        $this->date_register = date('d-m-Y h:i:s', time()); 
+        $this->date_register = date('d-m-Y h:i:s', time());
+        
         if($references){              
+           
             $num = explode("/",$references);
             $num_atual = sprintf('%04d',(int)($num[2])+1);   
         }else{
@@ -136,9 +138,9 @@ class PurchasesAdd extends Component
                     ]);
 
                     //update stock
-                    //$product = Product::find($item->id);
-                    //$product->stock = $product->stock + $item->qty;
-                    //$product->save();
+                    $product = Product::find($item->id);
+                    $product->stock = $product->stock + $item->qty;
+                    $product->save();
                 }
             }
 

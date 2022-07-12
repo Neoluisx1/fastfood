@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('profile',['Admin','Employee'])->default('Admin');
             $table->rememberToken();
-            $table->foreignId('branchiffices_id')->constrained();
+            $table->foreignId('branchiffice_id')->constrained();
             $table->timestamps();
         });
     }
