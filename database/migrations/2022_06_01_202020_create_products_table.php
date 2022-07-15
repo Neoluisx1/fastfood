@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('price2', 10,2)->default(0);
             $table->integer('stock')->default(0);
             $table->integer('ministock')->default(0);
+            $table->enum('unit_product',['Pieza'])->default('Pieza');
             $table->timestamps();
         });
     }

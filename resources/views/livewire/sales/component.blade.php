@@ -35,7 +35,7 @@
                                     <th class="border-b-2 dark:border-dark-5 whitespace-nowrap font-bold"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                                 @forelse($contentCart as $item)
                                 <tr class="bg-gray-200 dark:bg-dark-1 text-lg">
                                     <td class="border-b dark:border-dark-5 ">

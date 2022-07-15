@@ -3,6 +3,14 @@
                     <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="http://infinity.com"></a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active"></a> </div>
                     <!-- END: Breadcrumb -->
                     <!-- BEGIN: Account Menu -->
+                    <div class="intro-x dropdown w-30 h-8">
+                        <div class="dropdown-toggle w-20 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false">
+                        <a href="{{ route('sales') }}" class="side-menu {{ (Request::segment(1) == 'sales') ? 'side-menu--active side-menu--open' : ''}}">
+                           <items-center> <div class="side-menu__icon"> <i data-feather="shopping-cart"></i> POS</div></items-center>
+                        </a>
+
+                        </div>
+                    </div>
                     <div class="intro-x dropdown w-8 h-8">
                         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false">
                             <img alt="avatar" src="{{asset('dist/images/profile-2.jpg')}}">

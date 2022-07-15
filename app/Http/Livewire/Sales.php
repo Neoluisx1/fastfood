@@ -22,7 +22,7 @@ class Sales extends Component
     use CartTrait;
     use PrinterTrait;
 
-    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '', $pay = 'elegir',$num;
+    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '', $pay = 'elegir',$ticket=0;
 
     public $orderDetails = [], $search, $cash, $searchcustomer, $selected_id,$currentStatusOrder, $order_selected_id, $customer_id = null, $changes, $customerSelected = 'Seleccionar Cliente';
 
@@ -77,6 +77,7 @@ class Sales extends Component
             'phone'=>$this->phone,
             'city'=>$this->city,
             'pay'=> $this->pay,
+            'ticket'=>$this->ticket,
             'address'=>$this->address,
             'mail'=>$this->mail,
         ]);
@@ -173,6 +174,7 @@ public function getProductsByCategory($category_id)
     // SAVE SALE //
     public function storeSale($print = false)
     {
+        $this->ticket=$this->ticket+1;
         if ($this->getTotalCart() <= 0) {
             $this->noty('AGREGA PRODUCTOS A LA VENTA', 'noty', 'error');
             return;
@@ -197,7 +199,7 @@ public function getProductsByCategory($category_id)
                 'user_id' => Auth()->user()->id,
                 'customer_id' =>  $this->customer_id,
                 'pay'=>$this->pay,
-                'num'=>$this->num
+                'ticket'=>$this->ticket
             ]);
 
             if ($sale) {

@@ -15,22 +15,19 @@ class Purchases extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $search = '', $form = false, $date_register = '', $references = '', $almacen_id = 0, $status = 0, $provider_id = 0, $product_id;
+    public $search, $form = false, $date_register = '', $references = '', $almacen_id = 0, $status = 0, $provider_id = 0, $product_id;
 
     //Datos publicos para poder guardar datos de un nuevo proveedor
     public $name = '', $phone = '', $address = '', $email = '', $selected_id = 0;
 
     public $componentName = '', $action = '', $more_options = false;
 
-    private $pagination = 5;
+    private $pagination = 10;
 
     public function render()
     {
         $references = Purchase::select('references')->orDerby('references','desc')->limit(10)->get();
         $this->date_register = date('d-m-Y h:i:s', time());
-        $num = explode("/",$references);
-        $num_atual = sprintf('%04d',(int)($num[2])+1);
-        $this->references = 'COMPRA'.date('Y/d', time()).'/'.$num_atual;
         if(strlen($this->search) > 0){
             $info=Purchase::join('providers as p', 'p.id', 'purchases.provider_id')
             ->select('purchases.*', 'p.name as provider')

@@ -170,7 +170,7 @@ trait PrinterTrait
         // headers
         $order = Order::find($orderId);
         $printer->setJustification(Printer::JUSTIFY_LEFT);
-        $printer->text("Pedido: $order->num \n");
+        $printer->text("Pedido: $order->ticket \n");
         $printer->text("Fecha: " . Carbon::parse($order->created_at)->format('d/m/Y h:i:s A') ."\n");
         $printer->text("Cliente: ". $order->customer->name . "\n");
 

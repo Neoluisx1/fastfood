@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('profile',['Admin','Employee'])->default('Admin');
-            //$table->foreignId('branchiffices_id')->constrained();
+            //$table->foreignId('branchiffice_id')->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

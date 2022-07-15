@@ -1,5 +1,5 @@
 <script>
-    KioskBoard.init({
+    KioskBoards.init({
         keysArrayOfObjects:[{
             "0":"Q",
             "1":"W",
@@ -10,7 +10,7 @@
             "6":"U",
             "7":"I",
             "8":"O",
-            "9":"P"            
+            "9":"P"
         },{
             "0":"A",
             "1":"S",
