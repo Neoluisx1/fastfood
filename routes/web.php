@@ -12,6 +12,7 @@ use App\Http\Livewire\Settings;
 use App\Http\Livewire\Purchases;
 use App\Http\Livewire\PurchasesAdd;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\DetailsPurchase;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get(uri:'sales', action:Sales::class)->name(name:'sales')->middleware('au
 Route::get(uri:'reports', action:Reports::class)->name(name:'reports')->middleware('auth');
 Route::get(uri:'branch_offices', action:Branchoffices::class)->name(name:'branch_offices')->middleware('auth');
 Route::get(uri:'purchases_add', action:PurchasesAdd::class)->name(name:'purchases_add')->middleware('auth');
+Route::get('purchases_details/{id}', DetailsPurchase::class)->name(name:'purchases_details/')->middleware('auth');
 
 
 

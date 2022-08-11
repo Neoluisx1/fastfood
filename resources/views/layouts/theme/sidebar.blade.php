@@ -37,11 +37,11 @@
                                     <div class="side-menu__icon"> <i data-feather="plus"></i></div>
                                     <div class="side-menu__title"> Añadir Compra </div>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
-                    </li>               
+                    </li>
                     <li>
-                        <a href="{{ route('sales') }}" class="side-menu {{ (Request::segment(1) == 'sales') ? 'side-menu--active side-menu--open' : ''}}">
+                        <a href="#" class="side-menu {{ (Request::segment(1) == 'sales') ? 'side-menu--active side-menu--open' : ''}}">
                             <div class="side-menu__icon"> <i data-feather="shopping-cart"></i> </div>
                             <div class="side-menu__title"> Ventas </div>
                         </a>
@@ -53,7 +53,7 @@
                             <div class="side-menu__title"> Clientes </div>
                         </a>
                     </li>
-                    <li>                        
+                    <li>
                         <a href="{{ route('users') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="key"></i> </div>
                             <div class="side-menu__title"> Usuarios </div>
@@ -87,9 +87,9 @@
                                     <div class="side-menu__icon"> <i data-feather="plus"></i></div>
                                     <div class="side-menu__title"> Proveedores </div>
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
-                    </li>                     
+                    </li>
                     <li>
                         <a href="{{ route('branch_offices') }}" class="side-menu">
                             <div class="side-menu__icon"> <i data-feather="settings"></i> </div>

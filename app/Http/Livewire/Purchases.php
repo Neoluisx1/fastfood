@@ -15,7 +15,7 @@ class Purchases extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $search, $form = false, $date_register = '', $references = '', $almacen_id = 0, $status = 0, $provider_id = 0, $product_id;
+    public $search, $form = false, $vewr = false, $date_register = '', $references = '', $almacen_id = 0, $status = 0, $provider_id = 0, $product_id;
 
     //Datos publicos para poder guardar datos de un nuevo proveedor
     public $name = '', $phone = '', $address = '', $email = '', $selected_id = 0;
@@ -66,5 +66,12 @@ class Purchases extends Component
 
     public function noty($msg, $eventName = 'noty', $reset = true, $action = ''){
         $this->dispatchBrowserEvent($eventName,['msg' => $msg, 'type' => 'success', 'action' => $action]);
+    }
+    public function ShowPurchase(Purchase $purchase){
+        $this->vewr = true;
+        $this->form = false;
+        
+        //dd($this->vewr);
+        //return view('livewire.purchases.purchaseDetails')->layout('layouts.theme.app');;
     }
 }

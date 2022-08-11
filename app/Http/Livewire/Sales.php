@@ -22,7 +22,7 @@ class Sales extends Component
     use CartTrait;
     use PrinterTrait;
 
-    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '', $pay = 'elegir',$ticket=0;
+    public $name = '', $ci_nit = '', $phone = '', $mail = '', $city = '', $address = '',$notes = '', $pay = 'elegir',$ticket='';
 
     public $orderDetails = [], $search, $cash, $searchcustomer, $selected_id,$currentStatusOrder, $order_selected_id, $customer_id = null, $changes, $customerSelected = 'Seleccionar Cliente';
 
@@ -45,14 +45,21 @@ class Sales extends Component
 
     public function render()
     {
+        $suma=$this->ticket;
+        if($suma!=1){
+            $num = (int)$suma+2;
+            $num_llamado = $num;
+            //sprintf('%04d',(int)($num[2])+1);
+        }
 
-
+        else{
+            $num_llamado=1;
+        }
+        $this->ticket=$num_llamado;
         if (strlen($this->searchcustomer) > 0)
             $this->customers = Customer::where('ci_nit', 'like', "%{$this->searchcustomer}%")->orderBy('name', 'asc')->get()->take(5);
         else
             $this->customers = Customer::orderBy('ci_nit', 'asc')->get()->take(5);
-
-
         $this->totalCart = $this->getTotalCart();
         $this->itemsCart = $this->getItemsCart();
         $this->contentCart = $this->getContentCart();
@@ -77,7 +84,6 @@ class Sales extends Component
             'phone'=>$this->phone,
             'city'=>$this->city,
             'pay'=> $this->pay,
-            'ticket'=>$this->ticket,
             'address'=>$this->address,
             'mail'=>$this->mail,
         ]);
@@ -174,7 +180,6 @@ public function getProductsByCategory($category_id)
     // SAVE SALE //
     public function storeSale($print = false)
     {
-        $this->ticket=$this->ticket+1;
         if ($this->getTotalCart() <= 0) {
             $this->noty('AGREGA PRODUCTOS A LA VENTA', 'noty', 'error');
             return;
