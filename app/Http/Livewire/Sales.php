@@ -46,7 +46,7 @@ class Sales extends Component
     public function render()
     {
         $suma=$this->ticket;
-        if($suma!=1){
+        if($suma){
             $num = (int)$suma+2;
             $num_llamado = $num;
             //sprintf('%04d',(int)($num[2])+1);

@@ -41,7 +41,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="side-menu {{ (Request::segment(1) == 'sales') ? 'side-menu--active side-menu--open' : ''}}">
+                        <a href="{{ route('ventas') }}" class="side-menu {{ (Request::segment(1) == 'sales') ? 'side-menu--active side-menu--open' : ''}}">
                             <div class="side-menu__icon"> <i data-feather="shopping-cart"></i> </div>
                             <div class="side-menu__title"> Ventas </div>
                         </a>

@@ -39,7 +39,6 @@ Route::get(uri:'purchases_add', action:PurchasesAdd::class)->name(name:'purchase
 Route::get('purchases_details/{id}', DetailsPurchase::class)->name(name:'purchases_details/')->middleware('auth');
 
 
-
 Route::get(uri:'settings', action:Settings::class)->name(name:'settings')->middleware('auth');
 Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash')->middleware('auth');
 Route::get(uri:'purchases', action:Purchases::class)->name(name:'purchases')->middleware('auth');
