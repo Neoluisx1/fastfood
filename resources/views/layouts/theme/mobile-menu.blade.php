@@ -30,12 +30,7 @@
                             <div class="menu__title"> Compras </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="menu">
-                            <div class="menu__icon"> <i data-feather="shopping-cart"></i> </div>
-                            <div class="menu__title"> Ventas </div>
-                        </a>
-                    </li>
+
                     <div class="side-nav__devider my-6"></div>
                     <li>
                         <a href="#" class="menu">

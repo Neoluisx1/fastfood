@@ -1,7 +1,7 @@
 <nav class="side-nav">
                 <a href="{{ route('dash') }}" class="intro-x flex items-center pl-5 pt-4">
-                    <img alt="logo" class="w-6" src="{{asset('dist/images/logo.svg')}}">
-                    <span class="hidden xl:block text-white text-lg ml-3"> Fast<span class="font-medium">Food</span> </span>
+                    <img alt="logo" class="w-30" src="{{asset('dist/images/logo2.png')}}">
+                    <span class="hidden xl:block text-white text-lg ml-3"><span class="font-medium"></span> </span>
                 </a>
                 <div class="side-nav__devider my-6"></div>
                 <ul>
@@ -40,12 +40,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{ route('ventas') }}" class="side-menu {{ (Request::segment(1) == 'sales') ? 'side-menu--active side-menu--open' : ''}}">
-                            <div class="side-menu__icon"> <i data-feather="shopping-cart"></i> </div>
-                            <div class="side-menu__title"> Ventas </div>
-                        </a>
-                    </li>
+
                     <div class="side-nav__devider my-6"></div>
                     <li>
                         <a href="{{ route('customers') }}" class="side-menu">

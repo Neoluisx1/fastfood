@@ -13,6 +13,7 @@ use App\Http\Livewire\Purchases;
 use App\Http\Livewire\PurchasesAdd;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\DetailsPurchase;
+use App\Http\Livewire\Ventas;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware(['auth'])->group(function(){
 
 Route::get(uri:'categories', action:Categories::class)->name(name:'categories')->middleware('auth');
 Route::get(uri:'products', action:Products::class)->name(name:'products')->middleware('auth');
+Route::get(uri:'ventas', action:Ventas::class)->name(name:'ventas')->middleware('auth');
 Route::get(uri:'customers', action:Customers::class)->name(name:'customers')->middleware('auth');
 Route::get(uri:'users', action:Users::class)->name(name:'users')->middleware('auth');
 Route::get(uri:'sales', action:Sales::class)->name(name:'sales')->middleware('auth');
@@ -37,7 +39,7 @@ Route::get(uri:'reports', action:Reports::class)->name(name:'reports')->middlewa
 Route::get(uri:'branch_offices', action:Branchoffices::class)->name(name:'branch_offices')->middleware('auth');
 Route::get(uri:'purchases_add', action:PurchasesAdd::class)->name(name:'purchases_add')->middleware('auth');
 Route::get('purchases_details/{id}', DetailsPurchase::class)->name(name:'purchases_details/')->middleware('auth');
-
+Route::get(uri:'ventas', action:Ventas::class)->name(name:'ventas')->middleware('auth');
 
 Route::get(uri:'settings', action:Settings::class)->name(name:'settings')->middleware('auth');
 Route::get(uri:'dash', action:Dashboard::class)->name(name:'dash')->middleware('auth');
